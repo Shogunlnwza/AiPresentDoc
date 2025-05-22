@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-M">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ดาวน์โหลดคู่มือการเรียนรู้ AI / คุณโดนหลอกแล้ว!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* General Body Styles */
+        body {
+            font-family: 'Kanit', sans-serif;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%); /* Gradient background */
+            display: flex;
+            flex-direction: column; /* Allow content to stack vertically */
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Ensure it takes at least full viewport height */
+            color: #333;
+            box-sizing: border-box;
+        }
+
+        /* Scrollbar Styles for WebKit browsers (Chrome, Safari, Edge) */
+        ::-webkit-scrollbar {
+            width: 12px; /* ความกว้างของ scrollbar */
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 94, 255, 0.3); /* Changed to translucent blue! */
+            border-radius: 10px; /* ทำให้มุมโค้งมน */
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #6a11cb, #2575fc); /* สีของ thumb (แถบเลื่อน) */
+            border-radius: 10px; /* ทำให้มุมโค้งมน */
+            border: 3px solid rgba(255, 255, 255, 0.2); /* ขอบของ thumb ให้ดูนูนขึ้นเล็กน้อย */
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, #5a0ebf, #1e60e0); /* สีเมื่อเมาส์ชี้ */
+        }
+
+
+        /* Card Container Styles */
+        .card-container {
+            background-color: #ffffff; /* Light blue background for the card */
+            padding: 40px 50px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 550px;
+            width: 90%; /* Responsive width */
+            box-sizing: border-box;
+            animation: fadeIn 1s ease-out;
+            position: relative;
+            margin: 20px auto; /* Centered with vertical margin */
+            z-index: 1;
+        }
+
+        /* Form Section Styles */
+        #input-form-section h1 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 2.2em;
+            font-weight: 600;
+        }
+        #input-form-section p {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        input[type="text"],
+        input[type="email"] {
+            padding: 15px;
+            margin: 10px 0;
+            width: calc(100% - 30px); /* Full width minus padding */
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+        input[type="text"]:focus,
+        input[type="email"]:focus {
+            border-color: #005eff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 94, 255,1);
+        }
+        button {
+            padding: 15px 35px;
+            background-color: #2575fc; /* Blue for primary action */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-weight: 600;
+            margin-top: 25px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 15px rgba(37, 117, 252, 0.4);
+        }
+        button:hover {
+            background-color: #1a5acb;
+            transform: translateY(-2px);
+        }
+
+        /* Warning Section Styles */
+        #warning-section {
+            display: none; /* Hidden by default */
+        }
+        #warning-section h1 {
+            color: #e74c3c; /* Red for strong warning */
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            font-weight: 600;
+            animation: bounceIn 0.8s ease-out forwards; /* Apply bounce animation */
+            opacity: 0; /* Start hidden */
+            transform: scale(0.5); /* Start small */
+        }
+        #warning-section p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-size: 1.1em;
+            color: #555;
+            opacity: 0; /* Hidden by default for sequential animation */
+            animation: fadeIn 1s ease-out 0.5s forwards; /* Fades in after h1 */
+        }
+        .advice {
+            background-color: #fff3cd; /* Light yellow for advice box */
+            border-left: 6px solid #ffc107; /* Yellow border */
+            padding: 25px;
+            margin: 30px auto;
+            text-align: left;
+            border-radius: 8px;
+            font-size: 1em;
+            line-height: 1.8;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            opacity: 0; /* Hidden by default for sequential animation */
+            animation: fadeIn 1s ease-out 1s forwards; /* Fades in after p */
+        }
+        .advice strong {
+            color: #856404; /* Dark yellow for emphasis */
+            font-weight: 600;
+        }
+
+        /* General Fade-in animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Bounce-in animation for the "คุณโดนหลอกแล้ว!" text */
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) translateY(-50px);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.1) translateY(10px);
+            }
+            70% {
+                transform: scale(0.9) translateY(-5px);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+
+        /* ------------------------------------------- */
+        /* Responsive Styles (Media Queries) */
+        /* ------------------------------------------- */
+
+        /* For screens smaller than 600px (e.g., mobile phones) */
+        @media (max-width: 600px) {
+            body {
+                padding: 15px; /* Reduce overall padding */
+                min-height: unset; /* Allow content to determine height */
+                display: block; /* Change display from flex to block to allow normal flow */
+            }
+
+            .card-container {
+                padding: 30px 25px; /* Reduce padding inside the card */
+                margin: 15px auto; /* Adjust margin for smaller screens, keep centered */
+            }
+
+            #input-form-section h1 {
+                font-size: 1.8em; /* Smaller heading for mobile */
+            }
+            #input-form-section p {
+                font-size: 1em; /* Smaller paragraph text */
+            }
+
+            input[type="text"],
+            input[type="email"] {
+                padding: 12px; /* Slightly smaller input fields */
+                font-size: 0.95em;
+            }
+
+            button {
+                padding: 12px 25px; /* Smaller button */
+                font-size: 1.1em;
+            }
+
+            #warning-section h1 {
+                font-size: 2em; /* Smaller warning heading */
+            }
+            #warning-section p {
+                font-size: 1em; /* Smaller warning text */
+            }
+            .advice {
+                padding: 20px; /* Smaller padding for advice box */
+                font-size: 0.95em;
+            }
+        }
+
+        /* For very small screens (e.g., older phones or narrow viewports) */
+        @media (max-width: 400px) {
+            .card-container {
+                padding: 25px 15px; /* Even smaller padding */
+                margin: 10px auto;
+            }
+            #input-form-section h1 {
+                font-size: 1.6em;
+            }
+            input[type="text"],
+            input[type="email"] {
+                width: calc(100% - 20px); /* Adjust width for minimal padding */
+                padding: 10px;
+            }
+            button {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+            #warning-section h1 {
+                font-size: 1.8em;
+            }
+            .advice {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card-container">
+        <div id="input-form-section">
+            <h1>กรอกข้อมูลเพื่อรับคู่มือการเรียนรู้</h1>
+            <p>กรุณากรอกข้อมูลส่วนตัวของคุณเพื่อ **ตรวจสอบจำนวนนักเรียน** ที่สนใจและดาวน์โหลดคู่มือได้ทันที คู่มือนี้จะช่วยให้คุณเข้าใจพื้นฐาน AI ได้อย่างรวดเร็ว</p>
+            <form id="phishingForm">
+                <input type="text" id="name" placeholder="ชื่อ-นามสกุล" required><br>
+                <input type="email" id="email" placeholder="อีเมล" required><br>
+                <input type="text" id="phone" placeholder="เบอร์โทรศัพท์ (อย่างน้อย 10 ตัวอักษร)" required minlength="10"><br>
+                <button type="submit">ดาวน์โหลดคู่มือ</button>
+            </form>
+        </div>
+
+        <div id="warning-section">
+            <h1>คุณโดนหลอกแล้ว!</h1>
+            <p>ข้อมูลที่คุณเพิ่งกรอกไปนั้น **ไม่ควรเปิดเผย** ให้กับคนแปลกหน้าหรือเว็บไซต์ที่ไม่น่าเชื่อถือ</p>
+            <div class="advice">
+                <p><strong>นี่คือตัวอย่างของการหลอกลวงแบบฟิชชิ่ง (Phishing)</strong> มิจฉาชีพพยายามหลอกให้คุณกรอกข้อมูลส่วนตัวเพื่อนำไปใช้ในทางที่ผิด</p>
+                <p>โชคดีที่นี่เป็นเพียงเว็บไซต์จำลองเพื่อการศึกษา แต่ในโลกจริง คุณอาจตกเป็นเหยื่อและสูญเสียทรัพย์สินหรือข้อมูลสำคัญ</p>
+                <p><strong>จำไว้เสมอว่า:</strong> อย่ากรอกข้อมูลส่วนตัวให้กับลิงก์ที่ไม่รู้จัก หรือเว็บไซต์ที่ไม่น่าเชื่อถือ ตรวจสอบ URL เสมอ และคิดให้รอบคอบก่อนคลิก</p>
+                <p>ศึกษาเพิ่มเติมเกี่ยวกับการป้องกันการหลอกลวงได้จากแหล่งข้อมูลที่น่าเชื่อถือ เพื่อความปลอดภัยในโลกออนไลน์ของคุณ</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('phishingForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // ป้องกันการส่งฟอร์มจริงและการโหลดหน้าใหม่
+
+            // ซ่อนส่วนของแบบฟอร์ม
+            document.getElementById('input-form-section').style.display = 'none';
+
+            // แสดงส่วนของข้อความเตือน
+            document.getElementById('warning-section').style.display = 'block';
+
+            // เพื่อให้แอนิเมชัน bounceIn ทำงานทุกครั้งเมื่อแสดง warning-section
+            // เราสามารถลบคลาสแอนิเมชันออกแล้วเพิ่มกลับเข้าไปใหม่
+            const h1Element = document.querySelector('#warning-section h1');
+            const pElement = document.querySelector('#warning-section p');
+            const adviceElement = document.querySelector('#warning-section .advice');
+
+            // Reset animation properties (opacity and transform from CSS)
+            h1Element.style.opacity = 0;
+            h1Element.style.transform = 'scale(0.5)';
+            pElement.style.opacity = 0;
+            adviceElement.style.opacity = 0;
+
+            // Trigger reflow to restart animation (by removing and adding class)
+            h1Element.style.animation = 'none';
+            pElement.style.animation = 'none';
+            adviceElement.style.animation = 'none';
+            h1Element.offsetHeight; // Trigger reflow
+            pElement.offsetHeight; // Trigger reflow
+            adviceElement.offsetHeight; // Trigger reflow
+
+            h1Element.style.animation = 'bounceIn 0.8s ease-out forwards';
+            pElement.style.animation = 'fadeIn 1s ease-out 0.5s forwards';
+            adviceElement.style.animation = 'fadeIn 1s ease-out 1s forwards';
+        });
+    </script>
+</body>
+</html>
